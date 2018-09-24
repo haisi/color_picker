@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import java.awt.Color;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static java.awt.Color.*;
@@ -35,5 +37,12 @@ public class RadioInputView extends JPanel {
     void selectButton(Color color) {
         int idx = colors.indexOf(color);
         radioButtons.get(idx).setSelected(true);
+    }
+
+    void addListeners(Function<Color, Void> function) {
+        for (int i = 0; i < radioButtons.size(); i++) {
+            final Color color = colors.get(i);
+            radioButtons.get(i).addActionListener(e -> function.apply(color));
+        }
     }
 }

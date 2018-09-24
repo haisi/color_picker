@@ -21,6 +21,11 @@ public class RadioInputController implements ColorChangedListener {
     public RadioInputController(ColorModel model, RadioInputView view) {
         this.model = model;
         this.view = view;
+
+        this.view.addListeners(color -> {
+            model.changeColor(color);
+            return null;
+        });
     }
 
     @Override
