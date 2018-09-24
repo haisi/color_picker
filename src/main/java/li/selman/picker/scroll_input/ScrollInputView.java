@@ -9,7 +9,7 @@ import java.awt.event.AdjustmentListener;
  */
 public class ScrollInputView extends JPanel {
 
-    private final JScrollBar scrollBar = new JScrollBar(Adjustable.HORIZONTAL, 0, 1, 0, 255);
+    private final JScrollBar scrollBar = new JScrollBar(Adjustable.HORIZONTAL, 0, 1, 0, 256);
 
     public ScrollInputView() {
         super();
