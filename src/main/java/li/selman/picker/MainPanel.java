@@ -1,5 +1,7 @@
 package li.selman.picker;
 
+import li.selman.picker.canvas.CanvasController;
+import li.selman.picker.canvas.CanvasView;
 import li.selman.picker.hexer.HexController;
 import li.selman.picker.hexer.HexView;
 import li.selman.picker.integer_input.IntegerInputController;
@@ -8,7 +10,7 @@ import li.selman.picker.model.ColorModel;
 import li.selman.picker.scroll_input.ScrollInputController;
 import li.selman.picker.scroll_input.ScrollInputView;
 
-import java.awt.Color;
+import java.awt.*;
 import javax.swing.*;
 
 import static li.selman.picker.model.SupportedColorChannels.*;
@@ -27,9 +29,17 @@ class MainPanel extends JPanel {
         addScrollInput(model);
         addHexView(model);
         addIntegerInput(model);
+        addCanvas(model);
 
         model.changeColor(new Color(15, 0xBB, 255));
 
+    }
+
+    private void addCanvas(ColorModel model) {
+        CanvasView view = new CanvasView();
+        CanvasController controller = new CanvasController(view);
+        model.registerColorChangedListener(controller);
+        this.add(view);
     }
 
     private void addScrollInput(ColorModel model) {

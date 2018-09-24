@@ -11,6 +11,7 @@ public class Main implements Runnable {
     @Override
     public void run() {
         JFrame f = new JFrame();
+        f.setSize(500, 500);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.add(new MainPanel());
         f.pack();
