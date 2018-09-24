@@ -9,6 +9,8 @@ import li.selman.picker.hexer.HexView;
 import li.selman.picker.integer_input.IntegerInputController;
 import li.selman.picker.integer_input.IntegerInputView;
 import li.selman.picker.model.ColorModel;
+import li.selman.picker.radio_input.RadioInputController;
+import li.selman.picker.radio_input.RadioInputView;
 import li.selman.picker.scroll_input.ScrollInputController;
 import li.selman.picker.scroll_input.ScrollInputView;
 
@@ -33,9 +35,17 @@ class MainPanel extends JPanel {
         addIntegerInput(model);
         addCanvas(model);
         addButtonInput(model);
+        addRadioInput(model);
 
         model.changeColor(new Color(15, 0xBB, 255));
 
+    }
+
+    private void addRadioInput(ColorModel model) {
+        RadioInputView view = new RadioInputView();
+        RadioInputController controller = new RadioInputController(model, view);
+        model.registerColorChangedListener(controller);
+        this.add(view);
     }
 
     private void addButtonInput(ColorModel model) {
