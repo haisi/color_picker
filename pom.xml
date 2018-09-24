@@ -29,7 +29,7 @@
                     <!-- Specify main class to make build jar executable -->
                     <archive>
                         <manifest>
-                            <mainClass>li.selman.project.Main</mainClass>
+                            <mainClass>li.selman.picker.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
