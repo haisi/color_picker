@@ -1,7 +1,6 @@
 package li.selman.picker.integer_input;
 
 import li.selman.picker.model.ColorChangedListener;
-import li.selman.picker.model.ColorExtractor;
 import li.selman.picker.model.ColorModel;
 import li.selman.picker.model.SupportedColorChannels;
 
@@ -14,13 +13,11 @@ public class IntegerInputController implements ColorChangedListener {
 
     private final ColorModel model;
     private final IntegerInputView view;
-    private final ColorExtractor colorExtractor;
     private final SupportedColorChannels myColor;
 
-    public IntegerInputController(ColorModel model, IntegerInputView integerInputView, ColorExtractor colorExtractor, SupportedColorChannels myColor) {
+    public IntegerInputController(ColorModel model, IntegerInputView integerInputView, SupportedColorChannels myColor) {
         this.model = model;
         this.view = integerInputView;
-        this.colorExtractor = colorExtractor;
         this.myColor = myColor;
 
         this.view.setInputActionListener(e -> {
@@ -44,7 +41,7 @@ public class IntegerInputController implements ColorChangedListener {
 
     @Override
     public void colorChanged(Color color) {
-        final int n = colorExtractor.getMyColor(color);
+        final int n = myColor.getMyColor(color);
 
         view.setValue(n);
     }
