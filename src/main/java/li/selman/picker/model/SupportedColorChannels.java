@@ -18,6 +18,10 @@ public enum SupportedColorChannels {
         this.colorExtractor = colorExtractor;
     }
 
+    public Color getColor() {
+        return color;
+    }
+
     /**
      *
      * @param color to extract channel from

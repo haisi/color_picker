@@ -5,6 +5,8 @@ import li.selman.picker.hexer.HexView;
 import li.selman.picker.integer_input.IntegerInputController;
 import li.selman.picker.integer_input.IntegerInputView;
 import li.selman.picker.model.ColorModel;
+import li.selman.picker.scroll_input.ScrollInputController;
+import li.selman.picker.scroll_input.ScrollInputView;
 
 import java.awt.Color;
 import javax.swing.*;
@@ -22,11 +24,30 @@ class MainPanel extends JPanel {
 
         final ColorModel model = new ColorModel();
 
+        addScrollInput(model);
         addHexView(model);
         addIntegerInput(model);
 
         model.changeColor(new Color(15, 0xBB, 255));
 
+    }
+
+    private void addScrollInput(ColorModel model) {
+        ScrollInputView redView = new ScrollInputView();
+        ScrollInputView blueView = new ScrollInputView();
+        ScrollInputView greenView = new ScrollInputView();
+
+        ScrollInputController redController = new ScrollInputController(model, redView, RED);
+        ScrollInputController blueController = new ScrollInputController(model, blueView, BLUE);
+        ScrollInputController greenController = new ScrollInputController(model, greenView, GREEN);
+
+        this.add(redView);
+        this.add(blueView);
+        this.add(greenView);
+
+        model.registerColorChangedListener(redController);
+        model.registerColorChangedListener(blueController);
+        model.registerColorChangedListener(greenController);
     }
 
     private void addIntegerInput(ColorModel model) {
