@@ -27,7 +27,13 @@ class MainPanel extends JPanel {
         final ColorExtractor greenExtractor = Color::getGreen;
 
         addHexView(model, redExtractor, blueExtractor, greenExtractor);
+        addIntegerInput(model, redExtractor, blueExtractor, greenExtractor);
 
+        model.changeColor(new Color(15, 0xBB, 255));
+
+    }
+
+    private void addIntegerInput(ColorModel model, ColorExtractor redExtractor, ColorExtractor blueExtractor, ColorExtractor greenExtractor) {
         IntegerInputView redView = new IntegerInputView();
         IntegerInputView blueView = new IntegerInputView();
         IntegerInputView greenView = new IntegerInputView();
@@ -43,9 +49,6 @@ class MainPanel extends JPanel {
         model.registerColorChangedListener(redController);
         model.registerColorChangedListener(blueController);
         model.registerColorChangedListener(greenController);
-
-        model.changeColor(new Color(15, 0xBB, 255));
-
     }
 
     private void addHexView(ColorModel model, ColorExtractor redExtractor, ColorExtractor blueExtractor, ColorExtractor greenExtractor) {
