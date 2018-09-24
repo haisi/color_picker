@@ -2,26 +2,14 @@ package li.selman.picker;
 
 import li.selman.picker.hexer.HexController;
 import li.selman.picker.hexer.HexView;
+import li.selman.picker.integer_input.IntegerInputController;
+import li.selman.picker.integer_input.IntegerInputView;
 import li.selman.picker.model.ColorExtractor;
 import li.selman.picker.model.ColorModel;
+import li.selman.picker.model.SupportedColorChannels;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.EventQueue;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.Random;
-import javax.swing.Icon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  * @author Hasan Kara
@@ -29,7 +17,8 @@ import javax.swing.JPanel;
 class MainPanel extends JPanel {
 
     MainPanel() {
-        super(new BorderLayout());
+        super();
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         final ColorModel model = new ColorModel();
 
@@ -37,6 +26,29 @@ class MainPanel extends JPanel {
         final ColorExtractor blueExtractor = Color::getBlue;
         final ColorExtractor greenExtractor = Color::getGreen;
 
+        addHexView(model, redExtractor, blueExtractor, greenExtractor);
+
+        IntegerInputView redView = new IntegerInputView();
+        IntegerInputView blueView = new IntegerInputView();
+        IntegerInputView greenView = new IntegerInputView();
+
+        IntegerInputController redController = new IntegerInputController(model, redView, redExtractor, SupportedColorChannels.RED);
+        IntegerInputController blueController = new IntegerInputController(model, blueView, blueExtractor, SupportedColorChannels.BLUE);
+        IntegerInputController greenController = new IntegerInputController(model, greenView, greenExtractor, SupportedColorChannels.GREEN);
+
+        this.add(redView);
+        this.add(blueView);
+        this.add(greenView);
+
+        model.registerColorChangedListener(redController);
+        model.registerColorChangedListener(blueController);
+        model.registerColorChangedListener(greenController);
+
+        model.changeColor(new Color(15, 0xBB, 255));
+
+    }
+
+    private void addHexView(ColorModel model, ColorExtractor redExtractor, ColorExtractor blueExtractor, ColorExtractor greenExtractor) {
         final HexView redHexView = new HexView();
         final HexView blueHexView = new HexView();
         final HexView greenHexView = new HexView();
@@ -45,15 +57,12 @@ class MainPanel extends JPanel {
         HexController blueHexController = new HexController(blueHexView, blueExtractor);
         HexController greenHexController = new HexController(greenHexView, greenExtractor);
 
-        this.add(redHexView, BorderLayout.NORTH);
-        this.add(blueHexView, BorderLayout.CENTER);
-        this.add(greenHexView, BorderLayout.SOUTH);
+        this.add(redHexView);
+        this.add(blueHexView);
+        this.add(greenHexView);
 
         model.registerColorChangedListener(redHexController);
         model.registerColorChangedListener(blueHexController);
         model.registerColorChangedListener(greenHexController);
-
-        model.changeColor(new Color(15, 0xBB, 255));
-
     }
 }
