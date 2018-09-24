@@ -1,5 +1,7 @@
 package li.selman.picker;
 
+import li.selman.picker.button_input.ButtonInputController;
+import li.selman.picker.button_input.ButtonInputView;
 import li.selman.picker.canvas.CanvasController;
 import li.selman.picker.canvas.CanvasView;
 import li.selman.picker.hexer.HexController;
@@ -30,9 +32,16 @@ class MainPanel extends JPanel {
         addHexView(model);
         addIntegerInput(model);
         addCanvas(model);
+        addButtonInput(model);
 
         model.changeColor(new Color(15, 0xBB, 255));
 
+    }
+
+    private void addButtonInput(ColorModel model) {
+        ButtonInputView view = new ButtonInputView();
+        ButtonInputController controller = new ButtonInputController(model, view);
+        this.add(view);
     }
 
     private void addCanvas(ColorModel model) {
