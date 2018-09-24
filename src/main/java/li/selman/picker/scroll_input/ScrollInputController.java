@@ -23,20 +23,11 @@ public class ScrollInputController implements ColorChangedListener {
         this.view.setScrollBarColor(myColor.getColor());
         this.view.setInputActionListener(e -> {
             final Color oldColor = model.getColor();
-
-            int red = oldColor.getRed();
-            int blue = oldColor.getBlue();
-            int green = oldColor.getGreen();
-
             Integer newValue = view.getValue();
 
-            switch (myColor) {
-                case RED: red = newValue; break;
-                case BLUE: blue = newValue; break;
-                case GREEN: green = newValue; break;
-            }
+            Color newColor = myColor.createNewColor(oldColor, newValue);
 
-            this.model.changeColor(new Color(red, green, blue));
+            this.model.changeColor(newColor);
         });
     }
 

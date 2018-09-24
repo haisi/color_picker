@@ -22,6 +22,20 @@ public enum SupportedColorChannels {
         return color;
     }
 
+    public Color createNewColor(Color oldColor, int newValue) {
+        int red = oldColor.getRed();
+        int blue = oldColor.getBlue();
+        int green = oldColor.getGreen();
+
+        switch (this) {
+            case RED: red = newValue; break;
+            case BLUE: blue = newValue; break;
+            case GREEN: green = newValue; break;
+        }
+
+        return new Color(red, green, blue);
+    }
+
     /**
      *
      * @param color to extract channel from
