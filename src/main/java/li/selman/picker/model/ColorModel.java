@@ -1,8 +1,8 @@
 package li.selman.picker.model;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Hasan Kara
@@ -10,7 +10,7 @@ import java.util.List;
 public class ColorModel {
 
     private Color color = Color.BLACK;
-    private final List<ColorChangedListener> listeners = new ArrayList<>();
+    private final Set<ColorChangedListener> listeners = new HashSet<>();
 
     public synchronized void changeColor(Color color) {
         this.color = color;
