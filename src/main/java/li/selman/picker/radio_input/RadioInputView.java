@@ -20,6 +20,7 @@ public class RadioInputView extends JPanel {
     private List<String> colorNames = List.of("red", "blue", "green", "yellow", "cyan", "orange", "black");
     private List<Color> colors = List.of(RED, BLUE, GREEN, YELLOW, CYAN, ORANGE, BLACK);
     private final List<JRadioButton> radioButtons;
+    private final ButtonGroup group;
 
     public RadioInputView() {
         super();
@@ -27,7 +28,7 @@ public class RadioInputView extends JPanel {
 
         radioButtons = colorNames.stream().map(JRadioButton::new).collect(Collectors.toList());
 
-        ButtonGroup group = new ButtonGroup();
+        group = new ButtonGroup();
         radioButtons.forEach(group::add);
 
         radioButtons.forEach(this::add);
@@ -44,5 +45,9 @@ public class RadioInputView extends JPanel {
             final Color color = colors.get(i);
             radioButtons.get(i).addActionListener(e -> function.apply(color));
         }
+    }
+
+    void unselectAll() {
+        group.clearSelection();
     }
 }

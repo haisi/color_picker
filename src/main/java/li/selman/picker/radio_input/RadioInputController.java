@@ -32,6 +32,8 @@ public class RadioInputController implements ColorChangedListener {
     public void colorChanged(Color color) {
         if (colors.contains(color)) {
             view.selectButton(color);
+        } else {
+            view.unselectAll();
         }
     }
 }
